@@ -13,3 +13,5 @@ _Put both the binary to /usr/bin_ and give execution permission
   
   
 ```
+
+*Note you must have installed all the required tools before running script*
