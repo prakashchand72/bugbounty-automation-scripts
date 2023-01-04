@@ -1,0 +1,8 @@
+#!/usr/bin/sh
+subfinder -d $1 -o subdomains.txt 
+
+echo '-----------------------------------------------------'
+
+wc -l subdomains.txt 
+
+cat subdomains.txt | httpx --status-code --follow-redirects | tee -a httpx_status.txt
