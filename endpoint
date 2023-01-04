@@ -1,12 +1,11 @@
-#!/bin/bash
-subdomain = $1
+
 # Gather endpoints with gau
 echo "Gathering endpoints with gau..."
-cat subdomain | gau | tee gau_endpoints.txt
+cat $1 | gau | tee gau_endpoints.txt
 
 # Gather endpoints from Wayback Machine with waybackurls
 echo "Gathering endpoints from Wayback Machine with waybackurls..."
-cat subdomain | waybackurls | tee waybackurls_endpoints.txt
+cat $1 | waybackurls | tee waybackurls_endpoints.txt
 
 # Combine the results and sort them
 echo "Combining and sorting results..."
