@@ -5,21 +5,16 @@ target_url=$1
 
 # Gather endpoints with gau
 echo "Gathering endpoints with gau..."
-gau $target_url | tee -a gau_endpoints.txt
+gau $target_url | tee gau_endpoints.txt
 
-# Gather endpoints with waybackurls
-echo "Gathering endpoints with waybackurls..."
-waybackurls $target_url |tee -a waybackurls_endpoints.txt
+# Gather endpoints from Wayback Machine with waybackurls
+echo "Gathering endpoints from Wayback Machine with waybackurls..."
+waybackurls $target_url | tee waybackurls_endpoints.txt
 
-# Combine the results and sort by endpoint
+# Combine the results and sort them
 echo "Combining and sorting results..."
 cat gau_endpoints.txt waybackurls_endpoints.txt | sort | uniq > all_endpoints.txt
 
-# Create the endpoints.js file
-echo "Creating endpoints.js file..."
-echo "const endpoints = [" > endpoints.js
-while read endpoint; do
-    echo "  '$endpoint'," >> endpoints.js
-done < all_endpoints.txt
-echo "];" >> endpoints.js
-echo "module.exports = endpoints;" >> endpoints.js
+# Extract JS endpoints and write them to a separate file
+echo "Extracting JS endpoints..."
+grep ".js" all_endpoints.txt > endpoints.js
