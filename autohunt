@@ -1,0 +1,6 @@
+#!/usr/bin/sh
+
+subfinder -d $1 -o subdomains.txt 
+cat subdomains.txt | httpx | tee -a httpx_result.txt 
+cat httpx_result.txt | waybackurls | tee -a waybackurls.txt
+cat waybackurls.txt | nuclei | tee -a nuclei_result.txt
