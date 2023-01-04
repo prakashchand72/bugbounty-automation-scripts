@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Set the target URL
+target_url=$1
+
+# Gather subdomains with subfinder
+echo "Gathering subdomains with subfinder..."
+subfinder -d $target_url -o subfinder_subs.txt
+
+# Gather subdomains with sublist3r
+echo "Gathering subdomains with sublist3r..."
+sublist3r -d $target_url -o sublist3r_subs.txt
+
+# Gather subdomains with amass
+echo "Gathering subdomains with amass..."
+amass enum -d $target_url -o amass_subs.txt
+
+# Combine the results and sort by subdomain
+echo "Combining and sorting results..."
+cat subfinder_subs.txt sublist3r_subs.txt amass_subs.txt | sort | uniq > all_subs.txt
