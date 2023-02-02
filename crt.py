@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 '''
 This is the code for gathering all possible domains of the organization.
 you can automate this with httpx to get live domains. Have Fun
